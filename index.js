@@ -12,14 +12,18 @@ exports.handler = function(event, context, callback) {
     } else {
         content = body.url;
     }
-    wkhtmltopdf(content, body.options, function(code, signal) {
-        const response = {
-            statusCode: 200,
-            body: JSON.stringify({
-                pdfBase64: memStream.read().toString('base64'),
-                options: body.options
-            })
-        };
-        callback(null, response);
+    wkhtmltopdf(content, body.options, function(err) {
+        if (err != null) {
+            callback(err, null);
+        } else {
+            const response = {
+                statusCode: 200,
+                body: JSON.stringify({
+                    pdfBase64: memStream.read().toString('base64'),
+                    options: body.options
+                })
+            }
+            callback(null, response);
+        }
     }).pipe(memStream);
 };
