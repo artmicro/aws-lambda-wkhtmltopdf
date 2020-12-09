@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rm -f wkhtmltopdf.zip
+zip -r wkhtmltopdf.zip index.js node_modules wkhtmltopdf
