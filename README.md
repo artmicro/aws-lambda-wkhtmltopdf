@@ -3,7 +3,7 @@
 ## To update wkhtmltopdf:
 
 1. Download "lambda zip" from https://wkhtmltopdf.org/downloads.html.
-2. Delete bin, fonts and lib.
+2. Delete bin, fonts and lib, but preserve fonts/liftago.
 3. Unzip the lambda zip in this directory.
 
 Use ./build to build a distribution zip.
