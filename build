@@ -1,4 +1,4 @@
 #!/bin/bash
 
 rm -f wkhtmltopdf.zip
-zip -r wkhtmltopdf.zip index.js node_modules wkhtmltopdf
+zip -r wkhtmltopdf.zip index.js node_modules bin fonts lib

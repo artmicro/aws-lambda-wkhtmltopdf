@@ -1,7 +1,9 @@
 var wkhtmltopdf = require('wkhtmltopdf');
 var MemoryStream = require('memorystream');
 
-process.env['PATH'] = process.env['PATH'] + ':' + process.env['LAMBDA_TASK_ROOT'];
+process.env['PATH'] = process.env['PATH'] + ':' + process.env['LAMBDA_TASK_ROOT'] + "/bin";
+process.env['LD_LIBRARY_PATH'] = process.env['LAMBDA_TASK_ROOT'] + "/lib";
+process.env['FONTCONFIG_PATH'] = process.env['LAMBDA_TASK_ROOT'] + "/fonts";
 
 exports.handler = function(event, context, callback) {
     var body = JSON.parse(event.body);

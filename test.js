@@ -1,11 +1,11 @@
 /*
-File to test the lambda locally. Call with `node test.js`.
+File to test the lambda locally. See README.md for usage.
 */
-const index = require('./index.js');
+const fs = require("fs");
+const index = require("./index.js");
 
 const body = {
-    // The URL of the HTML to be rendered. Note the token has limited validity, so ths one many be expired already.
-    url: "https://daruj.liftago.com/gift-voucher?t=MjE4NjQzNHwxNjA3NTg5NTY3ODQwfExOWEpoUVRPakotV1VUY3Vpdm0zMkJHXzlJYz0=",
+    url: "https://admin.liftago.com/emails/attachments/receipts/gPW5XRhJqpQzO0BS/1005753771",
     options: {
       "pageSize": "A4",
       "orientation": "Portrait"
@@ -17,7 +17,12 @@ const event = {
 
 const callback = function(err, resp) {
     console.log("Callback error:", err);
-    console.log("Callback response:", resp);
+    if (err == null) {
+        var pdfBase64 = JSON.parse(resp.body).pdfBase64;
+        var pdf = Buffer.from(pdfBase64, "base64");
+        fs.writeFileSync("out.pdf", pdf);
+        console.log("Response written to out.pdf");
+    }
 }
 
 index.handler(event, null, callback);
